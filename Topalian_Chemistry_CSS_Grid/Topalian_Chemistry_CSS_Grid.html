@@ -1,0 +1,156 @@
+<!-- Dedicated to God the Father -->
+
+<!-- All Rights Reserved Christopher Topalian Copyright 2000-2023 -->
+
+<!-- https://github.com/ChristopherTopalian -->
+
+<!-- Topalian_Chemistry_CSS_Grid.html -->
+
+<!-- Version 001 -->
+
+<html>
+<head>
+<title> Topalian Chemistry CSS Grid </title>
+
+<script src = "data/theElements.js">
+</script>
+
+<link rel = "stylesheet" href = "css/style001.css">
+
+<script>
+
+function makeTiles(whichArray, rows, columns)
+{
+    // type of element
+    let theTitle = document.createElement("div");
+
+    // className
+    theTitle.className = "theTitleStyle";
+
+    // innerHTML
+    theTitle.innerHTML = "Topalian Chemistry";
+
+    // append theTitle to the document body
+    document.body.append(theTitle);
+
+    //----//
+
+    // type of element
+    let mainDiv = document.createElement("div");
+
+    // className
+    mainDiv.className = "gridContainerStyle";
+
+    // id
+    mainDiv.id = "mainDivId";
+
+    // append mainDiv to the document body
+    document.body.append(mainDiv);
+    
+    //----//
+
+    for (let x = 0; x < whichArray.length; x++)
+    {
+        // type of element
+        let theTile = document.createElement("div");
+
+        // id
+        theTile.id = whichArray[x].name;
+
+        // src
+        theTile.src = whichArray[x].imageUrl;
+        
+        // when left clicked
+        theTile.onclick = function()
+        {
+            window.open(whichArray[x].url);
+        };
+        
+        // when right clicked
+        theTile.oncontextmenu = function()
+        {
+            window.open(whichArray[x].imageUrl);
+        };
+
+        // className
+        theTile.className = "gridItemStyle nameOfElement";
+
+        // zIndex (layer)
+        theTile.style.zIndex = 1;
+
+        // border
+        theTile.style.borderStyle = "solid";
+        theTile.style.borderWidth = "3px";
+        theTile.style.borderColor = "white";
+        
+        // title
+        theTile.title += whichArray[x].number;
+        theTile.title += "\n";
+        theTile.title += whichArray[x].abbreviation;
+        theTile.title += "\n";
+        theTile.title += whichArray[x].name;
+
+        // gloss
+        // when a person hovers their mouse over a tile they will see a pop up label appear that shows the name of the chemical element
+        theTile.setAttribute("gloss", whichArray[x].name);
+        
+        // innerHTML
+        theTile.innerHTML = whichArray[x].abbreviation + "<br>";
+        
+        // style the texture
+        theTile.style.overflow = "hidden";
+        theTile.style.objectFit = "cover";
+
+        // font
+        theTile.style.fontFamily = "tahoma";
+        theTile.style.fontWeight = "bold";
+        theTile.style.fontSize = "25px";
+        theTile.style.color = "rgb(255, 255, 255)";
+        theTile.style.textAlign = "center";
+
+        // append theTile to mainDiv
+        mainDiv.append(theTile);
+
+        //----//
+        
+        // type of element
+        let theImage = document.createElement("img");
+        
+        // src
+        theImage.src = whichArray[x].imageUrl;
+        
+        // className
+        theImage.className = "fillStyle";
+        
+        // zIndex (layer)
+        theImage.style.zIndex = 1;
+        
+        // append theImage to theTile
+        theTile.append(theImage);
+    } 
+}
+
+function whenLoaded()
+{
+    // prevent right click menu
+    window.oncontextmenu = function(theEvent)
+    {
+        theEvent.preventDefault();
+    };
+
+    makeTiles(
+        theElements,  // which Array
+        theElements.length / 5,  // rows
+        5  // columns
+    );
+}
+
+</script>
+
+</head>
+
+<body onload = "whenLoaded();">
+
+</body>
+
+</html>
